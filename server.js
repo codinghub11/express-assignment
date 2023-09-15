@@ -1,20 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
-// Route for the homepage
-app.get('/', (req, res) => {
-  res.json({ msg: 'I am homepage' });
-});
-
-// Route for the about page
-app.get('/about', (req, res) => {
-  res.json({ msg: 'I am about page' });
-});
-
-// Route for the contact page
-app.get('/contact', (req, res) => {
-  res.json({ email: 'support@pwskills.com' });
+// Route for generating a random number
+app.get('/random', (req, res) => {
+  // Generate a random number between 1 and 100 (adjust as needed)
+  const randomNum = Math.floor(Math.random() * 100) + 1;
+  res.json({ random: randomNum });
 });
 
 // Start the server
