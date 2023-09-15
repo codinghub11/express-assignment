@@ -1,41 +1,31 @@
 const express = require('express');
 const app = express();
 
-// Dummy data for men and women products
-const menProducts = [
-  { id: 1, name: 'Men Product 1', category: 'Men' },
-  { id: 2, name: 'Men Product 2', category: 'Men' },
-  // Add more products here
-];
+// Initialize the counter
+let counter = 0;
 
-const womenProducts = [
-  { id: 1, name: 'Women Product 1', category: 'Women' },
-  { id: 2, name: 'Women Product 2', category: 'Women' },
-  // Add more products here
-];
+// Middleware to parse JSON request bodies
+app.use(express.json());
 
-// Root endpoint
+// Endpoint to get the current counter value
 app.get('/', (req, res) => {
-  res.send('Welcome to Men & Women Dummy Data');
+  res.json({ counter });
 });
 
-// Endpoint for getting 10 products data for men
-app.get('/men', (req, res) => {
-  res.json(menProducts.slice(0, 10));
+// Endpoint to increment the counter by 1
+app.post('/increment', (req, res) => {
+  counter++;
+  res.json({ counter });
 });
 
-// Endpoint for getting 10 products data for women
-app.get('/women', (req, res) => {
-  res.json(womenProducts.slice(0, 10));
-});
-
-// Handling "page not found" for all other routes
-app.use((req, res) => {
-  res.status(404).send('Page not found');
+// Endpoint to decrement the counter by 1
+app.post('/decrement', (req, res) => {
+  counter--;
+  res.json({ counter });
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
