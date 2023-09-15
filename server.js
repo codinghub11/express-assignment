@@ -1,31 +1,23 @@
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 8000;
 
-// Initialize the counter
-let counter = 0;
-
-// Middleware to parse JSON request bodies
-app.use(express.json());
-
-// Endpoint to get the current counter value
+// Route for the homepage
 app.get('/', (req, res) => {
-  res.json({ counter });
+  res.json({ msg: 'I am homepage' });
 });
 
-// Endpoint to increment the counter by 1
-app.post('/increment', (req, res) => {
-  counter++;
-  res.json({ counter });
+// Route for the about page
+app.get('/about', (req, res) => {
+  res.json({ msg: 'I am about page' });
 });
 
-// Endpoint to decrement the counter by 1
-app.post('/decrement', (req, res) => {
-  counter--;
-  res.json({ counter });
+// Route for the contact page
+app.get('/contact', (req, res) => {
+  res.json({ email: 'support@pwskills.com' });
 });
 
 // Start the server
-const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
